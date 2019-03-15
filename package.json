@@ -10,7 +10,6 @@
   "author": "Keith Cirkel (https://keithcirkel.co.uk/)",
   "license": "MIT",
   "devDependencies": {
-    "rollup": "^1.6.0",
-    "rollup-plugin-node-resolve": "^4.0.1"
+    "rollup": "^1.6.0"
   }
 }
