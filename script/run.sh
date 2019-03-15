@@ -1,13 +1,16 @@
 #!/bin/sh
+set -e
+trap 'cat dist/rollup.log >&2' ERR
 
-count=1
 rm -rf dist/
-while [ $count -eq 1 ]; do
-  rollup -c rollup.conf.js
-  ls dist/
-  count=$(ls dist/index-*.js | wc -l)
-  echo $count
+mkdir -p dist/
+while true; do
+  rollup -c rollup.conf.js &>dist/rollup.log
+  printf '.'
+  count=$(ls dist/*.js | wc -l)
   if [ $count -gt 1 ]; then
-    exit $count
+    printf '\n'
+    ls -t dist/*.js | xargs diff -U1
+    exit 1
   fi
 done
